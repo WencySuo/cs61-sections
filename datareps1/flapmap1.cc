@@ -2,12 +2,15 @@
 
 void add_sample(uintptr_t start, size_t duration, size_t flapcount) {
     // Placeholders to avoid compiler warnings. Replace them with your code.
-    (void) start, (void) duration, (void) flapcount; 
+    flapmap.insert({start, {start, duraiton, flapcount}});
 }
 
 bool has_sample(uintptr_t t) {
-    // Placeholders to avoid compiler warnings. Replace them with your code.
-    (void) t; 
+    for(auto it = flapmap.begin(); it != flapmap.end(); ++it){
+        if (it->first<= t && t < (it->first + it->second.duration)) {
+            return true; 
+        }
+    }
 	return false;
 }
 
